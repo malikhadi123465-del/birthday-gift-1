@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎉 Happy Birthday Baba Gi ❤️</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial,Helvetica,sans-serif;
+    }
+
+    body{
+      height:100vh;
+      overflow:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(-45deg,#ff6b6b,#ff9f43,#feca57,#ff6b81);
+      background-size:400% 400%;
+      animation:bgMove 12s ease infinite;
+      position:relative;
+    }
+
+    @keyframes bgMove{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    canvas{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+    }
+
+    .balloon{
+      position:absolute;
+      bottom:-120px;
+      font-size:45px;
+      animation:float linear forwards;
+      user-select:none;
+      z-index:1;
+    }
+
+    @keyframes float{
+      from{
+        transform:translateY(0) rotate(0deg);
+      }
+      to{
+        transform:translateY(-120vh) rotate(360deg);
+      }
+    }
+
+    .card{
+      position:relative;
+      z-index:5;
+      width:92%;
+      max-width:430px;
+      padding:30px;
+      text-align:center;
+      color:white;
+      border-radius:25px;
+      background:rgba(255,255,255,.18);
+      backdrop-filter:blur(16px);
+      box-shadow:0 20px 40px rgba(0,0,0,.25);
+      animation:pop .8s ease;
+    }
+
+    @keyframes pop{
+      from{
+        opacity:0;
+        transform:scale(.7);
+      }
+      to{
+        opacity:1;
+        transform:scale(1);
+      }
+    }
+
+    .cake{
+      font-size:75px;
+      animation:bounce 1.8s infinite;
+    }
+
+    @keyframes bounce{
+      0%,100%{transform:translateY(0);}
+      50%{transform:translateY(-12px);}
+    }
+
+    h1{
+      margin:15px 0;
+      font-size:2rem;
+    }
+
+    p{
+      line-height:1.8;
+      font-size:17px;
+    }
+
+    h3{
+      margin-top:25px;
+      color:#fff8;
+    }
+
+    button{
+      margin-top:25px;
+      border:none;
+      background:white;
+      color:#ff4d6d;
+      padding:14px 28px;
+      font-size:17px;
+      border-radius:50px;
+      cursor:pointer;
+      transition:.3s;
+      font-weight:bold;
+    }
+
+    button:hover{
+      transform:scale(1.08);
+    }
+
+    .spark{
+      position:fixed;
+      animation:explode 1s forwards;
+      pointer-events:none;
+      z-index:3;
+    }
+
+    @keyframes explode{
+      from{
+        transform:scale(.5);
+        opacity:1;
+      }
+      to{
+        transform:translateY(-80px) scale(2);
+        opacity:0;
+      }
+    }
+
+    @media(max-width:500px){
+      .card{
+        padding:22px;
+      }
+
+      h1{
+        font-size:1.6rem;
+      }
+
+      p{
+        font-size:15px;
+      }
+
+      .cake{
+        font-size:60px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="card">
+
+<div class="cake">🎂</div>
+
+<h1>🎉 Happy Birthday Baba Gi ❤️</h1>
+
+<p>
+
+Dear <b>Baba Gi</b>, ❤️<br><br>
+
+On your special day, I pray that Allah blesses you with
+good health, endless happiness, peace, and a long life.
+
+Thank you for your love, sacrifices, guidance, and support.
+You are our biggest inspiration and our greatest blessing.
+
+May every day of your life be filled with joy, success,
+and beautiful memories.
+
+🎉 Happy Birthday! 🎂
+
+</p>
+
+<h3>❤️ With Lots of Love ❤️</h3>
+
+<button onclick="celebrate()">
+🎊 Celebrate Again
+</button>
+
+</div>
+
+<script>
+
+/* Floating Balloons */
+
+function balloon(){
+
+const b=document.createElement("div");
+b.className="balloon";
+b.innerHTML="🎈";
+
+b.style.left=Math.random()*100+"vw";
+b.style.fontSize=(35+Math.random()*25)+"px";
+b.style.animationDuration=(8+Math.random()*5)+"s";
+
+document.body.appendChild(b);
+
+setTimeout(()=>b.remove(),13000);
+
+}
+
+setInterval(balloon,700);
+
+/* Fireworks */
+
+function fireworks(){
+
+for(let i=0;i<40;i++){
+
+const s=document.createElement("div");
+
+s.className="spark";
+
+s.innerHTML=["✨","🎇","💥","⭐"][Math.floor(Math.random()*4)];
+
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*70+"vh";
+s.style.fontSize=(15+Math.random()*25)+"px";
+
+document.body.appendChild(s);
+
+setTimeout(()=>s.remove(),1000);
+
+}
+
+}
+
+setInterval(fireworks,2200);
+
+/* Confetti */
+
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
+
+let w,h;
+
+function resize(){
+
+w=canvas.width=window.innerWidth;
+h=canvas.height=window.innerHeight;
+
+}
+
+resize();
+
+window.onresize=resize;
+
+const colors=[
+"#ff595e",
+"#ffca3a",
+"#8ac926",
+"#1982c4",
+"#6a4c93",
+"#ffffff",
+"#ff85a2"
+];
+
+let confetti=[];
+
+function createConfetti(){
+
+confetti=[];
+
+for(let i=0;i<300;i++){
+
+confetti.push({
+
+x:Math.random()*w,
+y:Math.random()*-h,
+size:Math.random()*8+4,
+speed:Math.random()*4+2,
+color:colors[Math.floor(Math.random()*colors.length)]
+
+});
+
+}
+
+}
+
+createConfetti();
+
+function animate(){
+
+ctx.clearRect(0,0,w,h);
+
+confetti.forEach(c=>{
+
+ctx.fillStyle=c.color;
+ctx.fillRect(c.x,c.y,c.size,c.size);
+
+c.y+=c.speed;
+
+if(c.y>h){
+
+c.y=-20;
+c.x=Math.random()*w;
+
+}
+
+});
+
+requestAnimationFrame(animate);
+
+}
+
+animate();
+
+function celebrate(){
+
+createConfetti();
+fireworks();
+
+}
+
+</script>
+
+</body>
+</html>
